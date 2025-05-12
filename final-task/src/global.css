@@ -1,0 +1,7 @@
+html {
+    scroll-behavior: smooth;
+  }
+body {
+    color: #fff;
+    background: hsl(266, 97%, 12%);
+}
