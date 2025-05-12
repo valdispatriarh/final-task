@@ -1,4 +1,3 @@
-
 const path = require('path');
 const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -15,8 +14,8 @@ const baseConfig = {
                 use: ['style-loader', 'css-loader'],
             },
             {
-                test: /\.ts?$/, 
-                use: 'ts-loader', 
+                test: /\.ts?$/,
+                use: 'ts-loader',
                 exclude: /node_modules/,
             },
         ],
