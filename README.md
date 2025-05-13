@@ -23,7 +23,7 @@ Deploy to GitHub Pages with `npm run deploy`
 
     "start": "webpack serve --open --config ./webpack.config.js --env mode=dev",
     "build": "webpack --config ./webpack.config.js --env mode=prod",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint .",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "prepare": "husky",
