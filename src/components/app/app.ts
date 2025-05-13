@@ -1,9 +1,12 @@
 // import AppView from '../view/appView';
 
-class App {
-    constructor() {
-        console.log('2');
-    }
-}
+// const appView = new AppView();
 
-export default App;
+// class App {
+//     constructor() {
+//         console.log('2');
+//     }
+
+// }
+
+// export default App;

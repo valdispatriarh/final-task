@@ -9,6 +9,7 @@ HTML5
 CSS3
 JavaScript/TypeScript
 Webpack
+Husky
 
 installation:
 If you have project local in terminal use: 
