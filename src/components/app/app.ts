@@ -1,6 +1,4 @@
-import AppView from '../view/appView';
-
-const appView = new AppView();
+// import AppView from '../view/appView';
 
 class App {
     constructor() {
