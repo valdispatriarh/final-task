@@ -1,18 +1,26 @@
 #!/bin/sh
 
+# Получаем список изменённых JS/TS файлов
 FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|ts|tsx)$')
 
 if [ -z "$FILES" ]; then
-  echo "Нет JS/TS файлов для проверки."
-  exit 0
+  echo "No JS/TS files to lint or format."
+else
+  echo "→ Running ESLint..."
+  npx eslint --fix $FILES
+
+  echo "→ Running Prettier..."
+  npx prettier --write $FILES
+
+  echo "$FILES" | xargs git add
 fi
 
-echo "→ Проверка ESLint"
-npx eslint --fix $FILES
+echo "→ Running tests..."
+npm run test
 
-echo "→ Форматирование Prettier"
-npx prettier --write $FILES
+if [ $? -ne 0 ]; then
+  echo "✗ Tests failed. Commit aborted."
+  exit 1
+fi
 
-echo "$FILES" | xargs git add
-
-echo "✓ Pre-commit хук выполнен успешно"
+echo "✓ All checks passed. Proceeding with commit."
