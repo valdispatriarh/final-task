@@ -1,7 +1,8 @@
 import './style2.css';
+
 class AppView {
     constructor() {
-        console.log('3');
+        console.log('30');
     }
 }
 
