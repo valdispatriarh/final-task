@@ -7,7 +7,7 @@ if [ -z "$FILES" ]; then
   echo "No JS/TS files to lint or format."
 else
   echo "→ Running ESLint..."
-  npx eslint --fix $FILES
+  npx eslint --fix "src/**/*.{js,ts}"
 
   echo "→ Running Prettier..."
   npx prettier --write $FILES
