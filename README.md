@@ -23,9 +23,9 @@ Deploy to GitHub Pages with `npm run deploy`
 
     "start": "webpack serve --open --config ./webpack.config.js --env mode=dev",
     "build": "webpack --config ./webpack.config.js --env mode=prod",
-    "lint": "eslint .",
+    "lint": "eslint src/**/*.{js,ts}",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "prepare": "husky",
     "format": "prettier --check .",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "git config core.hooksPath .git-hooks || echo 'Not in a git repo'"
