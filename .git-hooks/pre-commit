@@ -1,0 +1,16 @@
+#!/bin/sh
+FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|ts|tsx)$')
+
+if [ -z "$FILES" ]; then
+  echo "Нет JS/TS файлов для проверки."
+  exit 0
+fi
+
+echo "→ Проверка ESLint"
+npx eslint --fix $FILES
+
+echo "→ Форматирование Prettier"
+npx prettier --write $FILES
+
+echo "$FILES" | xargs git add
+echo "✓ Pre-commit хук выполнен успешно"
