@@ -4,6 +4,6 @@
 // const app = new App();
 // console.log('1');
 
-export default function sum(a: number, b: number) {
-  return a + b;
+export default function sum(a: number, b: number, c: number) {
+    return a + b + c;
 }
