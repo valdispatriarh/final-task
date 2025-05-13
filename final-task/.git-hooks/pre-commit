@@ -1,3 +1,23 @@
 #!/bin/sh
+# pre-commit: запускает ESLint и Prettier на изменённых файлах
 
-touch PreCommitHookRan
+# Получаем список изменённых файлов (в стейдже) с расширением .js/.ts/.tsx
+FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|ts|tsx)$')
+
+if [ -z "$FILES" ]; then
+  echo "Нет JS/TS файлов для проверки."
+  exit 0
+fi
+
+# Линтим и форматируем
+echo "→ Проверка ESLint"
+npx eslint --fix $FILES
+
+echo "→ Форматирование Prettier"
+npx prettier --write $FILES
+
+# Добавляем отформатированные файлы обратно в git staging
+echo "→ Обновляем stage"
+echo "$FILES" | xargs git add
+
+echo "✓ Pre-commit хук выполнен успешно"
