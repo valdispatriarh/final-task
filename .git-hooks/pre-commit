@@ -8,6 +8,12 @@ if [ -z "$FILES" ]; then
 else
   echo "→ Running ESLint..."
   npx eslint --fix "src/**/*.{js,ts}"
+  
+  # Проверка кода возврата ESLint
+  if [ $? -ne 0 ]; then
+    echo "✗ ESLint failed. Commit aborted."
+    exit 1
+  fi
 
   echo "→ Running Prettier..."
   npx prettier --write $FILES
