@@ -7,7 +7,7 @@ export default [
     {
         ignores: ['dist'],
     },
-    tseslint.config(eslint.configs.recommended, tseslint.configs.recommended, {
+    ...tseslint.config(eslint.configs.recommended, tseslint.configs.recommended, {
         rules: {
             '@typescript-eslint/no-explicit-any': 'error',
         },
