@@ -1,13 +1,13 @@
 #!/bin/sh
 
-# Получаем список изменённых JS/TS файлов
-FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|ts|tsx)$')
+# Получаем список изменённых JS/TS/HTML файлов
+FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|ts|tsx|html)$')
 
 if [ -z "$FILES" ]; then
-  echo "No JS/TS files to lint or format."
+  echo "No JS/TS/HTML files to lint or format."
 else
   echo "→ Running ESLint..."
-  npx eslint --fix "src/**/*.{js,ts}"
+  npx eslint --fix $FILES
   
   # Проверка кода возврата ESLint
   if [ $? -ne 0 ]; then
@@ -18,6 +18,7 @@ else
   echo "→ Running Prettier..."
   npx prettier --write $FILES
 
+  # Добавляем отформатированные файлы обратно в индекс git
   echo "$FILES" | xargs git add
 fi
 
