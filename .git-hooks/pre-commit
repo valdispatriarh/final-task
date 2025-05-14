@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Получаем список изменённых JS/TS/HTML файлов
+FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|ts|tsx|html)$')
+
+if [ -z "$FILES" ]; then
+  echo "No JS/TS/HTML files to lint or format."
+else
+  echo "→ Running ESLint..."
+   npx eslint --fix "src/**/*.{js,ts}"
+  
+  # Проверка кода возврата ESLint
+  if [ $? -ne 0 ]; then
+    echo "✗ ESLint failed. Commit aborted."
+    exit 1
+  fi
+
+  echo "→ Running Prettier..."
+  npx prettier --write $FILES
+
+  # Добавляем отформатированные файлы обратно в индекс git
+  echo "$FILES" | xargs git add
+fi
+
+echo "→ Running tests..."
+npm run test
+
+if [ $? -ne 0 ]; then
+  echo "✗ Tests failed. Commit aborted."
+  exit 1
+fi
+
+echo "✓ All checks passed. Proceeding with commit."
