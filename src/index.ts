@@ -1,9 +1,25 @@
-// import App from './components/app/app';
-// import './global.css';
+import './global.css';
+import { initRouter, navigate } from './router/router';
 
-// const app = new App();
-// console.log('1');
+const bodyTag = document.body;
+bodyTag.innerHTML = `
+  <nav>
+    <a href="/login" data-link>Login</a>
+    <a href="/register" data-link>Register</a>
+  </nav>
+  <main id="app"></main>
+`;
 
-export default function sum(a: number, b: number, c: number, d: number) {
-    return a + b + c + d;
-}
+document.addEventListener('click', (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+
+    if (target.matches('[data-link]')) {
+        e.preventDefault();
+        const href = target.getAttribute('href');
+        if (href) {
+            navigate(href);
+        }
+    }
+});
+
+initRouter();
