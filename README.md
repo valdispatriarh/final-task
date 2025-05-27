@@ -15,7 +15,9 @@ This project is an eCommerce shop where users can search for products, add them 
 
 ## ⚙️ Installation
 If you have project local in terminal use: 
+
 ```bash
+
 git pull 
 
 Next step in terminal is use:

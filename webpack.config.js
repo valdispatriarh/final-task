@@ -28,6 +28,9 @@ const baseConfig = {
         path: path.resolve(__dirname, './dist'),
         // publicPath: '/final-task/final-task/',
     },
+    devServer: {
+        historyApiFallback: true,
+    },
     plugins: [
         new DotenvWebpackPlugin(),
         new HtmlWebpackPlugin({
